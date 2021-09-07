@@ -5,7 +5,7 @@
 */
 
 // Import the state hook
-import React from 'react';
+import React, { useState } from 'react';
 // Import the Posts (plural!) and SearchBar components, since they are used inside App component
 import Posts from './components/Posts/Posts';
 import SearchBar from './components/SearchBar/SearchBar';
@@ -31,15 +31,17 @@ const App = () => {
         - if the `id` of the post matches `postId`, return a new post object with the desired values (use the spread operator).
         - otherwise just return the post object unchanged.
      */
-    setPosts = posts.map(item => {
-      if(item.id === postId.id){
-        return item
+    setPosts(posts.map(item => {
+      if(item.id === postId){
+        return {...item, likes:item.likes+1}
       }
-    })
+      return item
+    }))
   };
 
   return (
     <div className='App'>
+      <Posts likePost={likePost} posts={posts}> </Posts>
       {/* Add SearchBar and Posts here to render them */}
       {/* Check the implementation of each component, to see what props they require, if any! */}
     </div>
